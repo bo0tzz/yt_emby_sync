@@ -6,6 +6,7 @@ defmodule YoutubeDl do
                    "--newline",
                    "--write-subs",
                    "--embed-chapters",
+                   "--no-cache-dir",
                    ["-f", "bestvideo[height<=1080]+bestaudio/best[height<=1080]"],
                    ["--merge-output-format", "mkv"],
                    ["--sub-format", "srt"],
@@ -14,7 +15,7 @@ defmodule YoutubeDl do
                  |> List.flatten()
 
   def info(url) do
-    args = ["-J", url]
+    args = ["-J", "--no-cache-dir", url]
     {stdout, 0 = _stderr} = System.cmd(ytdl_binary(), args)
     Jason.decode!(stdout)
   end
