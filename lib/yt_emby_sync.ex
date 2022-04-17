@@ -10,6 +10,11 @@ defmodule YtEmbySync do
 
     download_videos(videos)
 
+    if Application.get_env(:yt_emby_sync, :destructive) do
+      cleanup(playlist)
+    end
+
+    System.stop()
     {:ok, self()}
   end
 
@@ -31,5 +36,25 @@ defmodule YtEmbySync do
 
       YoutubeDl.download(video, target_path)
     end
+  end
+
+  def cleanup(playlist) do
+    base_path = Files.base_path()
+
+    wanted_directories =
+      playlist["entries"]
+      |> Enum.map(&Files.sanitized_title/1)
+      |> Enum.map(&Path.join(base_path, &1))
+
+    base_path
+    |> File.ls!()
+    |> Enum.map(&Path.join(base_path, &1))
+    |> Enum.reject(&(&1 in wanted_directories))
+    |> Enum.filter(&File.dir?/1)
+    |> Enum.filter(fn dir ->
+      ".yt_emby_sync" in File.ls!(dir)
+    end)
+    |> tap(&Logger.info("Deleting directories: #{inspect(&1)}"))
+    |> Enum.map(&File.rm_rf!/1)
   end
 end
