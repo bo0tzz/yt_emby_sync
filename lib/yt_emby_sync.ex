@@ -1,7 +1,7 @@
 defmodule YtEmbySync do
   require Logger
 
-  def start(:normal, _args) do
+  def run() do
     config = Application.get_env(:yt_emby_sync, :targets)
 
     Logger.info("Retrieving youtube playlist data")
@@ -13,9 +13,6 @@ defmodule YtEmbySync do
     if Application.get_env(:yt_emby_sync, :destructive) do
       cleanup(playlist)
     end
-
-    System.stop()
-    {:ok, self()}
   end
 
   defp download_videos(videos) do

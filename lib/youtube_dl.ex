@@ -16,7 +16,7 @@ defmodule YoutubeDl do
 
   def info(url) do
     args = ["-J", "--no-cache-dir", url]
-    {stdout, 0 = _stderr} = System.cmd(ytdl_binary(), args)
+    {stdout, 0} = System.cmd(ytdl_binary(), args)
     Jason.decode!(stdout)
   end
 
