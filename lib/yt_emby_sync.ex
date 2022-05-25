@@ -23,7 +23,7 @@ defmodule YtEmbySync do
     target_path = Files.target_directory(video)
 
     if File.exists?(target_path) do
-      Logger.info("Video directory #{target_path} already exists - skipping")
+      Logger.debug("Video directory #{target_path} already exists - skipping")
     else
       File.mkdir!(target_path)
 
