@@ -1,5 +1,6 @@
 ARG BUILDER_IMAGE="hexpm/elixir:1.13.3-erlang-24.3.2-debian-bullseye-20210902-slim"
 ARG RUNNER_IMAGE="debian:bullseye-20210902-slim"
+ARG YT_DLP_VERSION="2022.06.22.1"
 
 FROM ${BUILDER_IMAGE} as builder
 
@@ -17,7 +18,7 @@ RUN mix local.hex --force && \
 # set build ENV
 ENV MIX_ENV="prod"
 
-RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/${YT_DLP_VERSION}/yt-dlp -o /usr/local/bin/yt-dlp
 RUN chmod a+rx /usr/local/bin/yt-dlp
 
 # install mix dependencies
