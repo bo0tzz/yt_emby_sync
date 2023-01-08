@@ -23,7 +23,8 @@ defmodule YtEmbySync.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
-      {:quantum, "~> 3.0"}
+      {:quantum, "~> 3.0"},
+      {:elli, "~> 3.3.0"}
     ]
   end
 end
