@@ -2,7 +2,7 @@ ARG BUILDER_IMAGE="hexpm/elixir:1.13.3-erlang-24.3.2-debian-bullseye-20210902-sl
 ARG RUNNER_IMAGE="debian:bullseye-20210902-slim"
 
 FROM ${BUILDER_IMAGE} as builder
-ARG YT_DLP_VERSION="2022.06.22.1"
+ARG YT_DLP_VERSION="2023.02.17"
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git curl \
