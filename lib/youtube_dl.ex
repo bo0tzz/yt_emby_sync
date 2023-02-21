@@ -6,6 +6,7 @@ defmodule YoutubeDl do
                    "--newline",
                    "--write-subs",
                    "--embed-chapters",
+                   "--write-info-json",
                    "--no-cache-dir",
                    ["-f", "bestvideo[height<=1080]+bestaudio/best[height<=1080]"],
                    ["--merge-output-format", "mkv"],
